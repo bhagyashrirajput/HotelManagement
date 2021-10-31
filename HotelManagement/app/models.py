@@ -15,7 +15,7 @@ class Organisation(models.Model):
     state_code = models.CharField(max_length=10, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class OrganisationCentre(models.Model):
@@ -30,7 +30,7 @@ class OrganisationCentre(models.Model):
     center_code = models.CharField(max_length=15, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class Designation(models.Model):
@@ -38,7 +38,7 @@ class Designation(models.Model):
     hirarachi_level = models.SmallIntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class Department(models.Model):
@@ -46,7 +46,7 @@ class Department(models.Model):
     department_code = models.CharField(max_length=10, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True, default=None)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class Employee(models.Model):
@@ -59,7 +59,7 @@ class Employee(models.Model):
     email_id = models.CharField(max_length=50, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class User(models.Model):
@@ -75,14 +75,14 @@ class User(models.Model):
     is_active: Field = models.Field(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class Module(models.Model):
     module_name = models.CharField(max_length=50, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class Menu(models.Model):
@@ -94,7 +94,7 @@ class Menu(models.Model):
     sequence_order = models.SmallIntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class Role(models.Model):
@@ -104,7 +104,7 @@ class Role(models.Model):
     accessible_right = models.SmallIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class RoleEmployee(models.Model):
@@ -115,7 +115,7 @@ class RoleEmployee(models.Model):
     is_active = models.Field(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class RoleMenuAssign(models.Model):
@@ -124,7 +124,7 @@ class RoleMenuAssign(models.Model):
     is_active = models.Field(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class GeneralCategory(models.Model):
@@ -132,7 +132,7 @@ class GeneralCategory(models.Model):
     category = models.CharField(max_length=20, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class Generaltem(models.Model):
@@ -142,7 +142,7 @@ class Generaltem(models.Model):
     generalcategory_masterid = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class CentreSpace(models.Model):
@@ -151,7 +151,7 @@ class CentreSpace(models.Model):
     centre_code = models.CharField(max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class CentreTable(models.Model):
@@ -160,7 +160,7 @@ class CentreTable(models.Model):
     centrespace_masterid = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class SalesUnitMaster(models.Model):
@@ -169,7 +169,7 @@ class SalesUnitMaster(models.Model):
     centre_code = models.CharField(max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class SalesUnitItemInfo(models.Model):
@@ -181,7 +181,7 @@ class SalesUnitItemInfo(models.Model):
     is_unlisted = models.Field(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class SalesUnitInvoiceprintingInfo(models.Model):
@@ -201,7 +201,7 @@ class SalesUnitCounter(models.Model):
     device_id = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class SalesUnitCounterLog(models.Model):
@@ -225,7 +225,7 @@ class SalesUnitCounterLog(models.Model):
     pos_logoutstatus = models.SmallIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class SalesUnitCounterLocks(models.Model):
@@ -234,7 +234,7 @@ class SalesUnitCounterLocks(models.Model):
     TokenCode = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class SalesCounterOrder(models.Model):
@@ -246,7 +246,7 @@ class SalesCounterOrder(models.Model):
     approverif_ordercancelled_userid = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class SalesCounterOrderDetails(models.Model):
@@ -261,7 +261,7 @@ class SalesCounterOrderDetails(models.Model):
     salecounter_orderid = models.BigIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class CustomerMaster(models.Model):
@@ -271,7 +271,7 @@ class CustomerMaster(models.Model):
     address1 = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class SalesInvoiceMaster(models.Model):
@@ -297,7 +297,7 @@ class SalesInvoiceMaster(models.Model):
     salesunit_masterid = models.SmallIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class SalesInvoiceDetails(models.Model):
@@ -308,7 +308,7 @@ class SalesInvoiceDetails(models.Model):
     quantity = models.DecimalField(max_digits=4, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class UserMaster(models.Model):
@@ -324,7 +324,7 @@ class UserMaster(models.Model):
     is_active = models.Field(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
 
 
 class UserLogs(models.Model):
@@ -333,4 +333,4 @@ class UserLogs(models.Model):
     logout = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(blank=True, null=True)
