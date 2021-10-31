@@ -2,48 +2,51 @@ from django.db import models
 
 
 # Create your models here.
+from django.db.models import Field
+
+
 class Organisation(models.Model):
-    name = models.CharField(max_length=60)
+    name = models.CharField(max_length=60, unique=True)
     state = models.CharField(max_length=15)
-    address = models.CharField(max_length=100)
-    lat = models.DecimalField(max_digits=10, decimal_places=8)
-    lng = models.DecimalField(max_digits=11, decimal_places=8)
-    city = models.CharField(max_length=60)
-    status_code = models.CharField(max_length=10)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    address = models.CharField(max_length=100, null=True)
+    lat = models.DecimalField(max_digits=10, decimal_places=8, null=True)
+    lng = models.DecimalField(max_digits=11, decimal_places=8, null=True)
+    city = models.CharField(max_length=60, null=True)
+    state_code = models.CharField(max_length=10, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class OrganisationCentre(models.Model):
     center_name = models.CharField(max_length=60)
     center_type = models.SmallIntegerField()
-    belongs_to = models.CharField(max_length=15)
+    belongs_to = models.CharField(max_length=15, null=True)
     address = models.CharField(max_length=100)
-    lat = models.DecimalField(max_digits=10, decimal_places=8)
-    lng = models.DecimalField(max_digits=11, decimal_places=8)
-    city = models.CharField(max_length=60)
+    lat = models.DecimalField(max_digits=10, decimal_places=8, null=True)
+    lng = models.DecimalField(max_digits=11, decimal_places=8, null=True)
+    city = models.CharField(max_length=60, null=True)
     id_number = models.SmallIntegerField()
-    center_code = models.CharField(max_length=15)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    center_code = models.CharField(max_length=15, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class Designation(models.Model):
     designation_name = models.CharField(max_length=60)
-    hirarachi_level = models.SmallIntegerField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    hirarachi_level = models.SmallIntegerField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class Department(models.Model):
     department_name = models.CharField(max_length=20)
-    department_code = models.CharField(max_length=10)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    department_code = models.CharField(max_length=10, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class Employee(models.Model):
@@ -53,55 +56,55 @@ class Employee(models.Model):
     department_id = models.SmallIntegerField()
     designation_id = models.SmallIntegerField()
     centre_code = models.CharField(max_length=15)
-    email_id = models.CharField(max_length=50)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    email_id = models.CharField(max_length=50, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class User(models.Model):
-    person_id = models.BigIntegerField()
-    email_id = models.CharField(max_length=50)
-    mobl_no = models.CharField(max_length=20)
+    person_id = models.BigIntegerField(null=True)
+    email_id = models.CharField(max_length=50, unique=True)
+    mobl_no = models.CharField(max_length=20, null=True)
     password = models.CharField(max_length=10)
-    person_type = models.SmallIntegerField()
+    person_type = models.SmallIntegerField(null=True)
     last_logout = models.DateTimeField()
     last_login = models.DateTimeField()
     session_id = models.CharField(max_length=200)
     ispolicy_logout = models.Field(default=0)
-    is_active = models.Field(default=0)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    is_active: Field = models.Field(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class Module(models.Model):
-    module_name = models.CharField(max_length=50)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    module_name = models.CharField(max_length=50, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class Menu(models.Model):
     menu_id = models.IntegerField()
-    menu_name = models.CharField(max_length=50)
+    menu_name = models.CharField(max_length=50, unique=True)
     menu_code = models.CharField(max_length=10)
     module_id = models.BigIntegerField()
-    url = models.CharField(max_length=50)
-    sequence_order = models.SmallIntegerField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    url = models.CharField(max_length=50, null=True)
+    sequence_order = models.SmallIntegerField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class Role(models.Model):
     role_id = models.IntegerField()
-    role_name = models.CharField(max_length=50)
+    role_name = models.CharField(max_length=50, unique=True)
     role_code = models.CharField(max_length=50)
     accessible_right = models.SmallIntegerField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class RoleEmployee(models.Model):
@@ -110,63 +113,63 @@ class RoleEmployee(models.Model):
     emp_masterid = models.IntegerField()
     assign_from = models.DateTimeField()
     is_active = models.Field(default=0)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class RoleMenuAssign(models.Model):
     role_masterid = models.IntegerField()
     menu_masterid = models.IntegerField()
     is_active = models.Field(default=0)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class GeneralCategory(models.Model):
-    category_name = models.CharField(max_length=50)
-    category = models.CharField(max_length=20)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    category_name = models.CharField(max_length=50, unique=True)
+    category = models.CharField(max_length=20, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class Generaltem(models.Model):
-    item_name = models.CharField(max_length=50)
-    item_number = models.IntegerField()
+    item_name = models.CharField(max_length=50, unique=True)
+    item_number = models.IntegerField(unique=True)
     unit = models.CharField(max_length=10)
     generalcategory_masterid = models.IntegerField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class CentreSpace(models.Model):
-    space_name = models.CharField(max_length=50)
-    code = models.CharField(max_length=20)
+    space_name = models.CharField(max_length=50, unique=True)
+    code = models.CharField(max_length=20, unique=True)
     centre_code = models.CharField(max_length=15)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class CentreTable(models.Model):
-    table_name = models.CharField(max_length=50)
+    table_name = models.CharField(max_length=50, unique=True)
     table_seqnumber = models.SmallIntegerField()
     centrespace_masterid = models.IntegerField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class SalesUnitMaster(models.Model):
-    sales_countername = models.CharField(max_length=50)
+    sales_countername = models.CharField(max_length=50, unique=True)
     gst_number = models.CharField(max_length=50)
     centre_code = models.CharField(max_length=15)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class SalesUnitItemInfo(models.Model):
@@ -176,9 +179,9 @@ class SalesUnitItemInfo(models.Model):
     listed_ondate = models.DateTimeField()
     unlisted_from = models.DateTimeField()
     is_unlisted = models.Field(default=0)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class SalesUnitInvoiceprintingInfo(models.Model):
@@ -193,12 +196,12 @@ class SalesUnitInvoiceprintingInfo(models.Model):
 
 class SalesUnitCounter(models.Model):
     salesunit_masterid = models.SmallIntegerField()
-    counter_number = models.CharField(max_length=50)
-    counter_name = models.CharField(max_length=50)
+    counter_number = models.CharField(max_length=50, unique=True)
+    counter_name = models.CharField(max_length=50, unique=True)
     device_id = models.CharField(max_length=50)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class SalesUnitCounterLog(models.Model):
@@ -208,7 +211,7 @@ class SalesUnitCounterLog(models.Model):
     credit_cashcollected = models.DecimalField(max_digits=10, decimal_places=2)
     expected_closeoutcash = models.DecimalField(max_digits=10, decimal_places=2)
     actual_closeoutcash = models.DecimalField(max_digits=10, decimal_places=2)
-    poshandover_fromstatus = models.SmallIntegerField()
+    poshandover_fromstatus = models.SmallIntegerField(null=True)
     cashrecived_fromuserid = models.IntegerField()
     cashhandover_to = models.DecimalField(max_digits=10, decimal_places=2)
     cashhandover_touserid = models.IntegerField()
@@ -219,18 +222,18 @@ class SalesUnitCounterLog(models.Model):
     is_current = models.Field(default=0)
     transactoin_date = models.DateTimeField()
     pos_logoutstatus = models.SmallIntegerField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class SalesUnitCounterLocks(models.Model):
     SalesUnitCounterID = models.SmallIntegerField()
     UserID = models.IntegerField()
     TokenCode = models.CharField(max_length=50)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class SalesCounterOrder(models.Model):
@@ -240,9 +243,9 @@ class SalesCounterOrder(models.Model):
     order_status = models.SmallIntegerField()
     reasonfor_ordercanceled = models.CharField(max_length=50)
     approverif_ordercancelled_userid = models.IntegerField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class SalesCounterOrderDetails(models.Model):
@@ -255,19 +258,19 @@ class SalesCounterOrderDetails(models.Model):
     kot_enddatetime = models.DateTimeField()
     kot_status = models.SmallIntegerField(default=1)
     salecounter_orderid = models.BigIntegerField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class CustomerMaster(models.Model):
-    email_id = models.CharField(max_length=50)
-    full_name = models.CharField(max_length=100)
+    email_id = models.CharField(max_length=50, unique=True)
+    full_name = models.CharField(max_length=100, unique=True)
     gst_number = models.CharField(max_length=50)
     address1 = models.CharField(max_length=50)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class SalesInvoiceMaster(models.Model):
@@ -291,9 +294,9 @@ class SalesInvoiceMaster(models.Model):
     transaction_number = models.CharField(max_length=50)
     is_paid = models.Field(default=0)
     salesunit_masterid = models.SmallIntegerField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class SalesInvoiceDetails(models.Model):
@@ -302,31 +305,31 @@ class SalesInvoiceDetails(models.Model):
     item_number = models.IntegerField()
     unit = models.CharField(max_length=50)
     quantity = models.DecimalField(max_digits=4, decimal_places=2)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class UserMaster(models.Model):
-    person_id = models.BigIntegerField()
-    email_id = models.CharField(max_length=50)
-    mobile_number = models.CharField(max_length=15)
+    person_id = models.BigIntegerField(null=True)
+    email_id = models.CharField(max_length=50, unique=True)
+    mobile_number = models.CharField(max_length=1, null=True)
     password = models.CharField(max_length=10)
-    person_type = models.SmallIntegerField()
+    person_type = models.SmallIntegerField(null=True)
     login = models.DateTimeField()
     logout = models.DateTimeField()
     session_id = models.CharField(max_length=200)
     ispolicy_logout = models.Field(default=0)
     is_active = models.Field(default=0)
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
 class UserLogs(models.Model):
     user_id = models.IntegerField()
     login = models.DateTimeField()
     logout = models.DateTimeField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
-    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
