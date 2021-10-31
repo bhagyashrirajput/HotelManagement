@@ -46,7 +46,7 @@ class Department(models.Model):
     department_code = models.CharField(max_length=10, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True)
+    deleted_at = models.DateTimeField(null=True, default=None)
 
 
 class Employee(models.Model):
@@ -209,7 +209,8 @@ class SalesUnitCounterLog(models.Model):
     cashP_payments = models.DecimalField(max_digits=10, decimal_places=2)
     cash_collected = models.DecimalField(max_digits=10, decimal_places=2)
     credit_cashcollected = models.DecimalField(max_digits=10, decimal_places=2)
-    expected_closeoutcash = models.DecimalField(max_digits=10, decimal_places=2)
+    expected_closeoutcash = models.DecimalField(
+        max_digits=10, decimal_places=2)
     actual_closeoutcash = models.DecimalField(max_digits=10, decimal_places=2)
     poshandover_fromstatus = models.SmallIntegerField(null=True)
     cashrecived_fromuserid = models.IntegerField()
